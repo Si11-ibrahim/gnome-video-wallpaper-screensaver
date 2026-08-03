@@ -11,7 +11,7 @@ export default class VideoWallpaperPreferences extends ExtensionPreferences {
         const page = new Adw.PreferencesPage();
         window.add(page);
 
-        const group = new Adw.PreferencesGroup({ title: 'Video Wallpaper & Screensaver' });
+        const group = new Adw.PreferencesGroup({ title: 'Video Wallpaper and Screensaver' });
         page.add(group);
 
         const videoRow = new Adw.ActionRow({
