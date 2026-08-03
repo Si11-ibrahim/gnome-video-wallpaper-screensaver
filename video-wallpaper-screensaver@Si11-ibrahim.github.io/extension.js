@@ -102,10 +102,10 @@ export default class VideoWallpaperExtension extends Extension {
 
         for (const mon of monitorGeometries()) {
             const geom = `${mon.width}x${mon.height}+${mon.x}+${mon.y}`;
+            const mpvCmd = `mpv --loop --no-audio --stop-screensaver=no --hwdec=auto --wid=$1 ${GLib.shell_quote(video)}`;
             const argv = [
                 'xwinwrap', '-g', geom, '-ni', '-s', '-nf', '-b', '-un', '-fdt', '--',
-                'mpv', '--loop', '--no-audio', '--stop-screensaver=no', '--hwdec=auto',
-                '--wid=WID', video,
+                'sh', '-c', mpvCmd, 'sh', 'WID',
             ];
             const proc = spawnArgv(argv);
             if (proc)
