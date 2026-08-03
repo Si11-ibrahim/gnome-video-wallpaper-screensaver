@@ -9,6 +9,18 @@ Play any local video file on loop as your desktop wallpaper and/or as a fullscre
 - Idle detection uses GNOME's native `Meta.IdleMonitor` — no polling, no extra background scripts.
 - Preferences UI to pick the video file, toggle each feature, and set the idle timeout.
 
+## Compatibility
+
+| | Supported | Not supported |
+|---|---|---|
+| Desktop | GNOME Shell only | KDE, XFCE, Cinnamon, MATE, etc. — this is a GNOME Shell extension and cannot be installed there at all |
+| GNOME Shell version | 45, 46, 47 (declared in `metadata.json`) | Outside that range, GNOME refuses to load the extension by default (fails safe, does not attempt to run) |
+| Display server — screensaver | X11 and Wayland | — |
+| Display server — live wallpaper | X11 only | Wayland (`xwinwrap` cannot embed a window into a Wayland desktop; the extension detects this and disables the wallpaper feature automatically) |
+| Testing status | Verified on Ubuntu 24.04, GNOME Shell 46, X11 | Not yet verified on other distros, other GNOME point releases, or Wayland sessions — treat those as untested, not guaranteed |
+
+If your libadwaita version is old (pre-1.4), the preferences window may fail to open even if the extension itself loads — this affects only the settings UI, not the wallpaper/screensaver functionality or GNOME Shell's stability.
+
 ## Requirements
 
 - GNOME Shell 45, 46, or 47.
