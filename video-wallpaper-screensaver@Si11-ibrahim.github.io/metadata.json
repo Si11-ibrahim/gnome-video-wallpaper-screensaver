@@ -1,0 +1,9 @@
+{
+    "uuid": "video-wallpaper-screensaver@Si11-ibrahim.github.io",
+    "name": "Video Wallpaper & Screensaver",
+    "description": "Plays a looping video as your desktop wallpaper and/or as a fullscreen screensaver after idle. Requires mpv, and xwinwrap for the live-wallpaper mode (X11 only — the wallpaper feature is unavailable on Wayland; the screensaver mode works on both).",
+    "shell-version": [ "45", "46", "47" ],
+    "url": "https://github.com/Si11-ibrahim/gnome-video-wallpaper-screensaver",
+    "version": 1,
+    "settings-schema": "org.gnome.shell.extensions.video-wallpaper"
+}

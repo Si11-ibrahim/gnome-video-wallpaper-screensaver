@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.video-wallpaper" path="/org/gnome/shell/extensions/video-wallpaper/">
+    <key name="video-path" type="s">
+      <default>""</default>
+      <summary>Path to the video file</summary>
+      <description>Absolute path to the video file used for the wallpaper and/or screensaver.</description>
+    </key>
+    <key name="wallpaper-enabled" type="b">
+      <default>false</default>
+      <summary>Enable live video wallpaper</summary>
+      <description>Play the video on loop as the desktop background. X11 only.</description>
+    </key>
+    <key name="screensaver-enabled" type="b">
+      <default>true</default>
+      <summary>Enable video screensaver</summary>
+      <description>Play the video fullscreen after the idle timeout elapses.</description>
+    </key>
+    <key name="idle-seconds" type="i">
+      <default>600</default>
+      <range min="10" max="7200"/>
+      <summary>Idle timeout in seconds</summary>
+      <description>How many seconds of inactivity before the screensaver starts.</description>
+    </key>
+    <key name="dismiss-poll-ms" type="i">
+      <default>500</default>
+      <range min="100" max="5000"/>
+      <summary>Dismiss responsiveness in milliseconds</summary>
+      <description>How often the extension checks for activity to dismiss the screensaver.</description>
+    </key>
+  </schema>
+</schemalist>
