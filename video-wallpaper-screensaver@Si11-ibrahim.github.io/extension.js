@@ -43,6 +43,38 @@ function killProc(proc) {
     }
 }
 
+// xwinwrap forks "sh -c ..." which in turn forks mpv; force_exit() on the
+// tracked Gio.Subprocess only kills xwinwrap itself and leaves the sh/mpv
+// descendants running, orphaned and invisible (no longer embedded anywhere).
+// Recursively kill the whole descendant tree, not just the top process.
+function killProcessTree(pid) {
+    try {
+        const script = `
+            kill_tree() {
+                for child in $(pgrep -P "$1"); do kill_tree "$child"; done
+                kill -TERM "$1" 2>/dev/null
+            }
+            kill_tree "$1"
+        `;
+        const killer = new Gio.Subprocess({
+            argv: ['bash', '-c', script, 'bash', String(pid)],
+            flags: Gio.SubprocessFlags.NONE,
+        });
+        killer.init(null);
+    } catch (e) {
+        // best-effort cleanup
+    }
+}
+
+function killProcessGroup(proc) {
+    if (!proc)
+        return;
+    const pid = proc.get_identifier();
+    if (pid)
+        killProcessTree(pid);
+    killProc(proc);
+}
+
 export default class VideoWallpaperExtension extends Extension {
     enable() {
         this._settings = this.getSettings();
@@ -74,7 +106,7 @@ export default class VideoWallpaperExtension extends Extension {
     }
 
     _stopWallpaper() {
-        this._wallpaperProcs.forEach(killProc);
+        this._wallpaperProcs.forEach(killProcessGroup);
         this._wallpaperProcs = [];
     }
 
